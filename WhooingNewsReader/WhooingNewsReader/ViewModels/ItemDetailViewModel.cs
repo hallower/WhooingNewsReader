@@ -1,4 +1,6 @@
-﻿using WhooingNewsReader.Models;
+﻿using System.Windows.Input;
+using WhooingNewsReader.Models;
+using Xamarin.Forms;
 
 namespace WhooingNewsReader.ViewModels
 {
@@ -32,11 +34,19 @@ namespace WhooingNewsReader.ViewModels
             }
         }
 
+        public ICommand OpenNewsCommand { protected set; get; }
+
         public ItemDetailViewModel(Item item = null)
         {
             Title = item.Subject;
             Item = item;
             DetailItem = new DetailItem();
+
+            OpenNewsCommand = new Command(() =>
+            {
+                // TODO : import url from the content
+                Device.OpenUri(new System.Uri("http://google.com"));
+            });
 
             GetDetail();
         }

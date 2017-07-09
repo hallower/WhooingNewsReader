@@ -18,5 +18,9 @@
 		</Grid>
 
 		<Views:HtmlLabel Text="{Binding Contents}" FontSize="Medium"/>
-	</StackLayout>
+
+        <Button Text="Open This News"
+                Command="{Binding OpenNewsCommand}"/>
+
+    </StackLayout>
 </ContentPage>
