@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="NewsReader.Views.ItemsPage"
+             x:Name="BrowseItemsPage"
+			 Title="{Binding Title}"
+             
+			 >
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Whooing.com" Clicked="WhooingClicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="ItemsListView"
+				ItemsSource="{Binding Items}"
+				VerticalOptions="FillAndExpand"
+				HasUnevenRows="true"
+				RefreshCommand="{Binding LoadItemsCommand}"
+				IsPullToRefreshEnabled="true"
+				IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+				CachingStrategy="RecycleElement"
+				ItemSelected="OnItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="{Binding Icon}" HeightRequest="36" WidthRequest="36" Grid.Column="0" Margin="4"/>
+
+                                <StackLayout Padding="10" Grid.Column="1">
+                                    <Label Text="{Binding Subject}"
+                                           LineBreakMode="NoWrap"
+                                           Style="{DynamicResource ListItemTextStyle}"
+                                           FontSize="16"/>
+                                    <Label Text="{Binding Latest}"
+                                           LineBreakMode="NoWrap"
+                                           Style="{DynamicResource ListItemDetailTextStyle}"
+                                           FontSize="13"/>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

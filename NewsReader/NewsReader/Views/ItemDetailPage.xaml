@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="NewsReader.Views.ItemDetailPage"
+			 xmlns:Views="clr-namespace:NewsReader.Views"
+			 Title="{Binding Title}">
+	<StackLayout Spacing="20" Padding="15">
+		<Label Text="{Binding Item.Subject}" FontSize="Medium"/>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="3*" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<Label Text="{Binding Username}" FontSize="Small" Grid.Column="1"/>
+			<Image Source="{Binding Image_url}" WidthRequest="80" Grid.Column="2"/>
+		</Grid>
+
+		<Views:HtmlLabel Text="{Binding Content}" FontSize="Medium"/>
+
+        <Button Text="Read News"
+                Command="{Binding OpenNewsCommand}"/>
+
+    </StackLayout>
+</ContentPage>
