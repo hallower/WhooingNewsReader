@@ -35,7 +35,7 @@ namespace NewsReader.ViewModels
         public ItemDetailViewModel(Item item = null)
         {
             Title = item.Subject;
-            Item = item;
+            Item = item ?? new Item();
             DetailItem = new DetailItem();
 
             GetDetail();
@@ -44,12 +44,16 @@ namespace NewsReader.ViewModels
             {
                 var content = DetailItem.Content;
                 int lastPos = content.IndexOf("</a>");
+                if(lastPos == -1)
+                {
+                    return;
+                }
+
                 int firstPos = content.LastIndexOf(">", lastPos);
 
                 Debug.WriteLine(content.Substring(firstPos + 1, lastPos - firstPos - 1));
                 Device.OpenUri(new System.Uri(content.Substring(firstPos + 1, lastPos - firstPos - 1)));
             });
-
 
         }
 
@@ -62,6 +66,11 @@ namespace NewsReader.ViewModels
 
         public async void GetDetail()
         {
+            if(Item.Bbs_id == string.Empty)
+            {
+                return;
+            }
+
             DetailItem received = await NewsGetter.Instance.GetNewsDetail(Item.Bbs_id);
 
             if (received == null)

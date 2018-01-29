@@ -15,11 +15,13 @@
     <Compile Update="Views\AboutPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\ItemDetailPage.xaml.cs">
+    <Compile Update="Views\ItemDetailView.xaml.cs">
       <SubType>Code</SubType>
+      <DependentUpon>ItemDetailView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ItemsPage.xaml.cs">
+    <Compile Update="Views\ItemsView.xaml.cs">
       <SubType>Code</SubType>
+      <DependentUpon>ItemsView.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\MainPage.xaml.cs">
       <SubType>Code</SubType>
@@ -27,6 +29,18 @@
     <Compile Update="Views\NewItemPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\PortraitMain.xaml.cs">
+      <DependentUpon>PortraitMain.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\LandscapeMain.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PortraitMain.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

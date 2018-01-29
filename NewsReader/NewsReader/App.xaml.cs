@@ -6,22 +6,31 @@ using Xamarin.Forms.Xaml;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace NewsReader
 {
-    public partial class App : Application
+    public partial class App : Application, ISystemConfiguration
     {
-        public App()
+        public App(AppOrientation orientation)
         {
             InitializeComponent();
 
-            SetMainPage();
+            SetMainPage(orientation);
         }
 
-        public static void SetMainPage()
+        public static void SetMainPage(AppOrientation orientation)
         {
-            Current.MainPage = new NavigationPage(new ItemsPage())
+            switch (orientation)
             {
-                Title = "News",
-                Icon = "list.png",
-            };
+                case AppOrientation.Landscape:
+                    Current.MainPage = new LandscapeMain();
+                    break;
+                case AppOrientation.Portrait:
+                    Current.MainPage = new NavigationPage(new PortraitMain());
+                    break;
+            }
+        }
+
+        public void OnOrientationChanged(AppOrientation orientation)
+        {
+            SetMainPage(orientation);
         }
     }
 }

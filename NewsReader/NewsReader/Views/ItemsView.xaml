@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="NewsReader.Views.ItemsView"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+             x:Name="BrowseItemsPage">
+
+    <StackLayout Padding="16,0,16,0">
+
+        <ListView x:Name="ItemsListView"
+                      Margin="0,8,0,0"
+                      ItemsSource="{Binding Items}"
+                      VerticalOptions="FillAndExpand"
+                      HasUnevenRows="true"
+                      RefreshCommand="{Binding LoadNewItemsCommand}"
+                      IsPullToRefreshEnabled="true"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      CachingStrategy="RecycleElement"
+                      ItemSelected="OnItemSelected">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="0" Margin="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="48" />
+                                <ColumnDefinition Width="8" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="72"/>
+                            </Grid.RowDefinitions>
+
+                            <controls:CircleImage Source="{Binding Icon}"
+                                                      Grid.Column="0"/>
+
+                            <Grid Padding="0" Margin="0" Grid.Column="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height=".6*"/>
+                                    <RowDefinition Height=".4*"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Text="{Binding Subject}"
+                                           Margin="0"
+                                           Grid.Row="0"
+                                           LineBreakMode="TailTruncation"
+                                           VerticalTextAlignment="Center"
+                                           VerticalOptions="CenterAndExpand"
+                                           Style="{DynamicResource ListItemTextStyle}"
+                                           FontSize="16"
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+
+                                <Label Text="{Binding Latest}"
+                                           Margin="0"
+                                           Grid.Row="1"
+                                           LineBreakMode="TailTruncation"
+                                           VerticalTextAlignment="Center"
+                                           VerticalOptions="CenterAndExpand"
+                                           Style="{DynamicResource ListItemDetailTextStyle}"
+                                           FontSize="12"/>
+                            </Grid>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentView>

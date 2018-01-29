@@ -3703,6 +3703,9 @@ namespace NewsReader.Droid
 			// aapt resource value: 0x7f090027
 			public const int abc_toolbar_collapse_description = 2131296295;
 			
+			// aapt resource value: 0x7f09003e
+			public const int app_name = 2131296318;
+			
 			// aapt resource value: 0x7f090036
 			public const int appbar_scrolling_view_behavior = 2131296310;
 			
@@ -3774,6 +3777,9 @@ namespace NewsReader.Droid
 			
 			// aapt resource value: 0x7f090013
 			public const int mr_user_route_category_name = 2131296275;
+			
+			// aapt resource value: 0x7f09003f
+			public const int open_news = 2131296319;
 			
 			// aapt resource value: 0x7f090039
 			public const int password_toggle_content_description = 2131296313;

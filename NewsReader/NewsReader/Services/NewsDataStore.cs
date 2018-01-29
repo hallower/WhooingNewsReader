@@ -13,7 +13,7 @@ namespace NewsReader.Services
 {
     public class NewsDataStore : IDataStore<Item>
     {
-        static readonly int maxNewsCount = 30;
+        static readonly int maxNewsCount = 100;
 
         bool isInitialized;
         int oldNewsID = int.MaxValue;
@@ -62,18 +62,9 @@ namespace NewsReader.Services
             return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Item>> GetItemsAsync()
         {
-            if (forceRefresh)
-            {
-                Reset();
-                await InitializeAsync();
-            }
-            else
-            {
-                await GetLatestItemsAsync();
-            }
-
+            await GetLatestItemsAsync();
             return await Task.FromResult(items);
         }
 
