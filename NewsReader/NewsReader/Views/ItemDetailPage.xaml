@@ -5,44 +5,64 @@
 			 xmlns:Customs="clr-namespace:NewsReader.Views.Customs"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
 			 Title="{Binding Title}">
-    <StackLayout Spacing="8" Padding="16">
-        <Label Text="{Binding Item.Subject}" FontSize="Medium"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+    <StackLayout Padding="16, 24, 16, 24">
 
-            <Label Text="{Binding Username}" FontSize="Small" Grid.Column="1"/>
 
-            <controls:CircleImage Source="{Binding Image_url}" 
-                                  Aspect="AspectFill" 
-                                  Grid.Column="2"
-                                  WidthRequest="75" 
-                                  HeightRequest="75">
-                <!--
-                <controls:CircleImage.WidthRequest>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android, iOS">55</On>
-                        <On Platform="WinPhone">75</On>
-                    </OnPlatform>
-                </controls:CircleImage.WidthRequest>
-                <controls:CircleImage.HeightRequest>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="Android, iOS">55</On>
-                        <On Platform="WinPhone">75</On>
-                    </OnPlatform>
-                </controls:CircleImage.HeightRequest>
-                /-->
-            </controls:CircleImage>
+
+        <Grid Padding="0" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="88" />
+                <RowDefinition Height="16" />
+                <RowDefinition Height=".85*" />
+                <RowDefinition Height=".15*" />
+            </Grid.RowDefinitions>
+
+            <Grid Padding="0" Margin="0" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="12" />
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="8" />
+                    <ColumnDefinition Width="64" />
+                </Grid.ColumnDefinitions>
+
+                <Label Text="{Binding Item.Subject}" 
+                       FontSize="20"
+                       Grid.Column="0"
+                       Grid.Row="0"
+                       Grid.RowSpan="3"
+                       LineBreakMode="WordWrap"
+                       VerticalTextAlignment="Center"
+                       VerticalOptions="CenterAndExpand"
+                       FontAttributes="Bold"
+                       TextColor="Black"/>
+
+                <Label Text="{Binding Username}"
+                       Grid.Column="2"
+                       Grid.Row="2"
+                       FontSize="10" 
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       LineBreakMode="TailTruncation"/>
+
+                <controls:CircleImage Source="{Binding Image_url}" 
+                                      Grid.Column="2"
+                                      Grid.Row="0"
+                                      Grid.RowSpan="2"/>
+            </Grid>
+
+            <Customs:HtmlLabel Text="{Binding Content}" 
+                               FontSize="16"
+                               Grid.Row="2"/>
+
+            <Button Text="Read News"
+                    Command="{Binding OpenNewsCommand}"
+                    Grid.Row="3"/>
 
         </Grid>
-
-        <Customs:HtmlLabel Text="{Binding Content}" FontSize="Medium"/>
-
-        <Button Text="Read News"
-                Command="{Binding OpenNewsCommand}"/>
-
     </StackLayout>
 </ContentPage>

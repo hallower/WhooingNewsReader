@@ -57,8 +57,8 @@
 
                                 <Grid Padding="0" Margin="0" Grid.Column="2">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height=".65*"/>
-                                        <RowDefinition Height=".35*"/>
+                                        <RowDefinition Height=".6*"/>
+                                        <RowDefinition Height=".4*"/>
                                     </Grid.RowDefinitions>
 
                                     <Label Text="{Binding Subject}"
@@ -66,8 +66,10 @@
                                            Grid.Row="0"
                                            LineBreakMode="TailTruncation"
                                            VerticalTextAlignment="Center"
+                                           VerticalOptions="CenterAndExpand"
                                            Style="{DynamicResource ListItemTextStyle}"
                                            FontSize="16"
+                                           FontAttributes="Bold"
                                            TextColor="Black"/>
 
                                     <Label Text="{Binding Latest}"
@@ -75,6 +77,7 @@
                                            Grid.Row="1"
                                            LineBreakMode="TailTruncation"
                                            VerticalTextAlignment="Center"
+                                           VerticalOptions="CenterAndExpand"
                                            Style="{DynamicResource ListItemDetailTextStyle}"
                                            FontSize="12"/>
                                 </Grid>
