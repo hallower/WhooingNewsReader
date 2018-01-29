@@ -4,7 +4,7 @@ using System.ComponentModel;
 using Android.Text;
 using Xamarin.Forms;
 using NewsReader.Droid;
-using NewsReader.Views;
+using NewsReader.Views.Customs;
 using Android.Text.Method;
 using NewsReader.Droid.Renderers;
 using Android.Content;

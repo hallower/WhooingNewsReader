@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace NewsReader.Views
+namespace NewsReader.Views.Customs
 {
     public class HtmlLabel : Label
     {

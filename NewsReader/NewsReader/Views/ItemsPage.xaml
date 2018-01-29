@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 x:Class="NewsReader.Views.ItemsPage"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
              x:Name="BrowseItemsPage"
 			 Title="{Binding Title}"
              
@@ -10,37 +11,73 @@
         <ToolbarItem Text="Whooing.com" Clicked="WhooingClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="16,0,16,0">
             <ListView x:Name="ItemsListView"
-				ItemsSource="{Binding Items}"
-				VerticalOptions="FillAndExpand"
-				HasUnevenRows="true"
-				RefreshCommand="{Binding LoadItemsCommand}"
-				IsPullToRefreshEnabled="true"
-				IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-				CachingStrategy="RecycleElement"
-				ItemSelected="OnItemSelected">
+                      Margin="0,8,0,0"
+                      ItemsSource="{Binding Items}"
+                      VerticalOptions="FillAndExpand"
+                      HasUnevenRows="true"
+                      RefreshCommand="{Binding LoadItemsCommand}"
+                      IsPullToRefreshEnabled="true"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      CachingStrategy="RecycleElement"
+                      ItemSelected="OnItemSelected">
+                
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
+                            <Grid Padding="0" Margin="0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="48" />
+                                    <ColumnDefinition Width="8" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <Image Source="{Binding Icon}" HeightRequest="36" WidthRequest="36" Grid.Column="0" Margin="4"/>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="72"/>
+                                </Grid.RowDefinitions>
 
-                                <StackLayout Padding="10" Grid.Column="1">
+                                <controls:CircleImage Source="{Binding Icon}"
+                                                      Grid.Column="0">
+                                    <!--
+                                    <controls:CircleImage.WidthRequest>
+                                    <OnPlatform x:TypeArguments="x:Double">
+                                    <On Platform="Android, iOS">55</On>
+                                    <On Platform="WinPhone">75</On>
+                                    </OnPlatform>
+                                    </controls:CircleImage.WidthRequest>
+                                    <controls:CircleImage.HeightRequest>
+                                    <OnPlatform x:TypeArguments="x:Double">
+                                    <On Platform="Android, iOS">55</On>
+                                    <On Platform="WinPhone">75</On>
+                                    </OnPlatform>
+                                    </controls:CircleImage.HeightRequest>
+                                    /-->
+                                </controls:CircleImage>
+
+                                <Grid Padding="0" Margin="0" Grid.Column="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height=".65*"/>
+                                        <RowDefinition Height=".35*"/>
+                                    </Grid.RowDefinitions>
+
                                     <Label Text="{Binding Subject}"
-                                           LineBreakMode="NoWrap"
+                                           Margin="0"
+                                           Grid.Row="0"
+                                           LineBreakMode="TailTruncation"
+                                           VerticalTextAlignment="Center"
                                            Style="{DynamicResource ListItemTextStyle}"
-                                           FontSize="16"/>
+                                           FontSize="16"
+                                           TextColor="Black"/>
+
                                     <Label Text="{Binding Latest}"
-                                           LineBreakMode="NoWrap"
+                                           Margin="0"
+                                           Grid.Row="1"
+                                           LineBreakMode="TailTruncation"
+                                           VerticalTextAlignment="Center"
                                            Style="{DynamicResource ListItemDetailTextStyle}"
-                                           FontSize="13"/>
-                                </StackLayout>
+                                           FontSize="12"/>
+                                </Grid>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

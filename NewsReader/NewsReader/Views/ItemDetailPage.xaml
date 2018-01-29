@@ -2,22 +2,44 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 x:Class="NewsReader.Views.ItemDetailPage"
-			 xmlns:Views="clr-namespace:NewsReader.Views"
+			 xmlns:Customs="clr-namespace:NewsReader.Views.Customs"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
 			 Title="{Binding Title}">
-	<StackLayout Spacing="20" Padding="15">
-		<Label Text="{Binding Item.Subject}" FontSize="Medium"/>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="3*" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
+    <StackLayout Spacing="8" Padding="16">
+        <Label Text="{Binding Item.Subject}" FontSize="Medium"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-			<Label Text="{Binding Username}" FontSize="Small" Grid.Column="1"/>
-			<Image Source="{Binding Image_url}" WidthRequest="80" Grid.Column="2"/>
-		</Grid>
+            <Label Text="{Binding Username}" FontSize="Small" Grid.Column="1"/>
 
-		<Views:HtmlLabel Text="{Binding Content}" FontSize="Medium"/>
+            <controls:CircleImage Source="{Binding Image_url}" 
+                                  Aspect="AspectFill" 
+                                  Grid.Column="2"
+                                  WidthRequest="75" 
+                                  HeightRequest="75">
+                <!--
+                <controls:CircleImage.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android, iOS">55</On>
+                        <On Platform="WinPhone">75</On>
+                    </OnPlatform>
+                </controls:CircleImage.WidthRequest>
+                <controls:CircleImage.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android, iOS">55</On>
+                        <On Platform="WinPhone">75</On>
+                    </OnPlatform>
+                </controls:CircleImage.HeightRequest>
+                /-->
+            </controls:CircleImage>
+
+        </Grid>
+
+        <Customs:HtmlLabel Text="{Binding Content}" FontSize="Medium"/>
 
         <Button Text="Read News"
                 Command="{Binding OpenNewsCommand}"/>
