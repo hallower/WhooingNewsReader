@@ -21,7 +21,7 @@ namespace NewsReader.Views
         {
             InitializeComponent();
 
-            BindingContext = vm = new ItemsViewModel();
+            BindingContext = vm = ItemsViewModel.Instance;
 
             var itemsView = new ItemsView(vm);
             itemsView.ItemSelected += (async (sender, args) =>

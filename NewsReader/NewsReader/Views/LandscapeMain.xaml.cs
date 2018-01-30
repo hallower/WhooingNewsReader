@@ -21,7 +21,7 @@ namespace NewsReader.Views
         {
             InitializeComponent();
 
-            ivm = new ItemsViewModel();
+            ivm = ItemsViewModel.Instance;
             var itemsView = new ItemsView(ivm);
             itemsView.ItemSelected += ((sender, args) =>
             {

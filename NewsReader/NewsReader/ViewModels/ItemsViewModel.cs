@@ -10,32 +10,39 @@ using Xamarin.Forms;
 
 namespace NewsReader.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public sealed class ItemsViewModel : BaseViewModel
     {
+        private static readonly Lazy<ItemsViewModel> lazy =
+            new Lazy<ItemsViewModel>(() => new ItemsViewModel());
+
+        private int noMoreNoticeCount;
+
         public ObservableRangeCollection<Item> Items { get; set; } = new ObservableRangeCollection<Item>();
         public Command LoadItemsCommand { get; set; }
         public Command LoadNewItemsCommand { get; set; }
         public Command LoadOldItemsCommand { get; set; }
 
+        public static ItemsViewModel Instance { get { return lazy.Value; } }
+
+        private ItemsViewModel()
+        {
+            Title = "후잉 퍼온 뉴스";
+            LoadItemsCommand = new Command(async () => await ExecuteLoadNewItemsCommand(true));
+            LoadNewItemsCommand = new Command(async () => await ExecuteLoadNewItemsCommand());
+            LoadOldItemsCommand = new Command(async () => await ExecuteLoadOldItemsCommand());
+        }
+
         public Item LastItem
         {
             get
             {
-                if(Items.Count == 0)
+                if (Items.Count == 0)
                 {
                     return new Item();
                 }
 
                 return Items[Items.Count - 1];
             }
-        }
-
-        public ItemsViewModel()
-        {
-            Title = "후잉 퍼온 뉴스";
-            LoadItemsCommand = new Command(async () => await ExecuteLoadNewItemsCommand(true));
-            LoadNewItemsCommand = new Command(async () => await ExecuteLoadNewItemsCommand());
-            LoadOldItemsCommand = new Command(async () => await ExecuteLoadOldItemsCommand());
         }
 
         async Task ExecuteLoadNewItemsCommand(bool isFirst = false)
@@ -45,7 +52,7 @@ namespace NewsReader.ViewModels
             {
                 return;
             }
-            
+
             IsBusy = true;
 
             try
@@ -89,13 +96,17 @@ namespace NewsReader.ViewModels
 
             if (Items.Count > DataStore.MaxItemsCount)
             {
-                MessagingCenter.Send<Object, MessagingCenterAlert>(this, "alert", new MessagingCenterAlert
+                if (noMoreNoticeCount++ % 5 == 0)
                 {
-                    Title = "잠시만요",
-                    Message = "충분히 예전 뉴스들을 많이 보셨네요. \n 더 보시려면 위 whooing.com에서 봐주세요. ^^;;;;",
-                    Cancel = "OK"
-                });
-                Debug.WriteLine("Too much Old items");
+                    MessagingCenter.Send<Object, MessagingCenterAlert>(this, "alert", new MessagingCenterAlert
+                    {
+                        Title = "잠시만요",
+                        Message = "충분히 예전 뉴스들을 많이 보셨네요. \n 더 보시려면 위 whooing.com에서 봐주세요. ^^;;;;",
+                        Cancel = "OK"
+                    });
+                    Debug.WriteLine("Too much Old items");
+                }
+
                 return;
             }
 

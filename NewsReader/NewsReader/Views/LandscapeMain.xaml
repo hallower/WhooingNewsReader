@@ -11,9 +11,9 @@
     <ContentPage.Content>
         <Grid x:Name="LandscapeGrid" Margin="0" Padding="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width=".45*" />
                 <ColumnDefinition Width="8" />
-                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width=".55*" />
             </Grid.ColumnDefinitions>
         </Grid>
     </ContentPage.Content>

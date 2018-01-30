@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
+using System.Web;
 using System.Windows.Input;
 using NewsReader.Models;
 using Xamarin.Forms;
@@ -44,15 +46,16 @@ namespace NewsReader.ViewModels
             {
                 var content = DetailItem.Content;
                 int lastPos = content.IndexOf("</a>");
-                if(lastPos == -1)
+                if (lastPos == -1)
                 {
                     return;
                 }
 
                 int firstPos = content.LastIndexOf(">", lastPos);
 
-                Debug.WriteLine(content.Substring(firstPos + 1, lastPos - firstPos - 1));
-                Device.OpenUri(new System.Uri(content.Substring(firstPos + 1, lastPos - firstPos - 1)));
+                var url = HttpUtility.HtmlDecode(content.Substring(firstPos + 1, lastPos - firstPos - 1));
+                Debug.WriteLine("url1, " + url);
+                Device.OpenUri(new System.Uri(url));
             });
 
         }
@@ -66,7 +69,7 @@ namespace NewsReader.ViewModels
 
         public async void GetDetail()
         {
-            if(Item.Bbs_id == string.Empty)
+            if (Item.Bbs_id == string.Empty)
             {
                 return;
             }
